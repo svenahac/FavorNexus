@@ -4,7 +4,6 @@ import "../assets/LoginPage.css";
 import { supa_connection } from "../functions/supabase";
 
  
-
 interface LoginState {
   email: string;
   password: string;
@@ -25,10 +24,17 @@ export default function LoginPage() {
     }));
   };
   
-  const handle_login = (event: React.FormEvent<HTMLFormElement>) => {
+  const handle_login = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // TODO 
     let sb = supa_connection();
+    const { data, error } = await sb.auth.signInWithPassword({
+      email: loginData.email,
+      password: loginData.password,
+    })
+    console.log(error);
+
+
     console.log(loginData);
   }
   const navigate = useNavigate();
