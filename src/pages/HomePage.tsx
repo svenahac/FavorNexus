@@ -23,6 +23,7 @@ export default function HomePage() {
       datetime: "25.7.2023",
       created_at: "2h ago",
       location: "Koper",
+      byUser: "4",
     },
     {
       id: 2,
@@ -34,6 +35,7 @@ export default function HomePage() {
       datetime: "5.8.2023",
       created_at: "5h ago",
       location: "Ljubljana",
+      byUser: "1",
     },
   ];
 

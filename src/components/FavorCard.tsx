@@ -5,7 +5,7 @@ function FavorCard(props: any) {
 
   return (
     <div className="flex justify-center p-2 h-48 ">
-      <div className="flex flex-col justify-between w-full min-h-full border-2 overflow-y-scroll border-primary rounded-md">
+      <div className="flex flex-col justify-between w-full min-h-full border-2 overflow-y-scroll bg-primary rounded-md">
         <div className="flex flex-row justify-between">
           <div className="flex flex-row">
             <div className="ml-1 mr-1">img</div>
