@@ -1,20 +1,31 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../assets/LoginPage.css";
-import { check_login } from "../functions/login"
 
 interface LoginState {
-  username: string;
+  email: string;
   password: string;
 }
 
 export default function LoginPage() {
   
   const [loginData, setLoginData] = useState<LoginState>({
-    username: '',
+    email: '',
     password: '',
   });
+
+  const handle_input_change = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setLoginData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
   
+  const handle_login = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log(loginData);
+  }
   const navigate = useNavigate();
   const navigateToRegister = () => {
     navigate("/register");
@@ -24,6 +35,7 @@ export default function LoginPage() {
       id="LoginPage"
       className="m-0 flex flex-col min-h-screen justify-center items-center"
     >
+  <form onSubmit={handle_login}>
       <h1 className="text-4xl font-bold mb-10 text-primaryGreen">
         Favor Nexus
       </h1>
@@ -36,6 +48,8 @@ export default function LoginPage() {
             className="block py-2.5 px-0 w-full text-sm text-primary bg-transparent border-0 border-b-2 border-primary appearance-none focus:outline-none focus:ring-0 focus:border-secondaryBlue peer"
             placeholder=" "
             required
+            value={loginData.email}
+            onChange={handle_input_change}
           />
           <label
             htmlFor="email"
@@ -52,6 +66,8 @@ export default function LoginPage() {
             className="block py-2.5 px-0 w-full text-sm text-primary bg-transparent border-0 border-b-2 border-primary appearance-none focus:outline-none focus:ring-0 focus:border-secondaryBlue peer"
             placeholder=" "
             required
+            value={loginData.password}
+            onChange={handle_input_change}
           />
           <label
             htmlFor="password"
@@ -62,9 +78,8 @@ export default function LoginPage() {
         </div>
         <div className="w-36 h-10 mb-2 flex flex-col items-center">
           <button
-            type="button"
-            className="text-white bg-primary hover:bg-primaryGreen focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-10 py-2.5 mr-2 mb-2"
-            onClick={check_login}
+            type="submit"
+            className="text-white bg-primary hover:bg-primaryGreen focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-10 py-2.5 mr-2 mb-2" 
           >
             Login
           </button>
@@ -81,6 +96,7 @@ export default function LoginPage() {
           </button>
         </div>
       </div>
+    </form>
     </div>
   );
 }
