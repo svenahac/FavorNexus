@@ -1,12 +1,24 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../assets/LoginPage.css";
+import { check_login } from "../functions/login"
+
+interface LoginState {
+  username: string;
+  password: string;
+}
 
 export default function LoginPage() {
+  
+  const [loginData, setLoginData] = useState<LoginState>({
+    username: '',
+    password: '',
+  });
+  
   const navigate = useNavigate();
   const navigateToRegister = () => {
     navigate("/register");
   };
-  console.log(process.env.REACT_APP_TEST);
   return (
     <div
       id="LoginPage"
@@ -52,6 +64,7 @@ export default function LoginPage() {
           <button
             type="button"
             className="text-white bg-primary hover:bg-primaryGreen focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-10 py-2.5 mr-2 mb-2"
+            onClick={check_login}
           >
             Login
           </button>
