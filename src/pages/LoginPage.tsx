@@ -7,6 +7,7 @@ import { supabase } from "../functions/supabase";
 interface LoginState {
   email: string;
   password: string;
+  wrong_info: bool;
 }
 
 export default function LoginPage() {
@@ -14,6 +15,7 @@ export default function LoginPage() {
   const [loginData, setLoginData] = useState<LoginState>({
     email: '',
     password: '',
+    wrong_info: false,
   });
 
   const handle_input_change = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,7 +27,6 @@ export default function LoginPage() {
   };
   
   const handle_login = async (event: React.FormEvent<HTMLFormElement>) => {
-    // const router = UseRouter();
     event.preventDefault();
     // TODO 
     const { data, error } = await supabase.auth.signInWithPassword({
@@ -36,9 +37,9 @@ export default function LoginPage() {
     if (error == null) {
       
       console.log(data);
-      // router.refresh();
     } else {
-      console.log("LOGIN ERROR");
+      console.log("LOGIN ERROR"); // TODO
+      loginData.wrong_info == true;
     }
 
   }
