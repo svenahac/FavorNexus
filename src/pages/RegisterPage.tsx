@@ -8,7 +8,7 @@ export default function RegisterPage() {
   return (
     <div
       id="LoginPage"
-      className="m-0 flex flex-col min-h-screen justify-center items-center"
+      className="m-0 flex flex-col min-h-screen justify-center items-center bg-primary"
     >
       <h1 className="text-4xl font-bold mb-10 text-primaryGreen">
         Favor Nexus
