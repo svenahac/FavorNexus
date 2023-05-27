@@ -30,18 +30,18 @@ export default function LoginPage() {
       <div className="rounded-xl w-85 h-100 bg-white flex flex-col justify-center items-center ">
         <div className="relative z-0 mb-6 w-72">
           <input
-            type="text"
-            name="username"
-            id="username"
+            type="email"
+            name="email"
+            id="email"
             className="block py-2.5 px-0 w-full text-sm text-primary bg-transparent border-0 border-b-2 border-primary appearance-none focus:outline-none focus:ring-0 focus:border-secondaryBlue peer"
             placeholder=" "
             required
           />
           <label
-            htmlFor="username"
+            htmlFor="email"
             className="peer-focus:font-medium absolute left-0 text-sm text-primary duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-secondaryBlue peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
           >
-            Username
+            E-mail
           </label>
         </div>
         <div className="relative z-0 mb-6 w-72">
