@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../assets/LoginPage.css";
-import { supa_connection } from "../functions/supabase";
+import { supabase } from "../functions/supabase";
 
  
 interface LoginState {
@@ -25,17 +25,22 @@ export default function LoginPage() {
   };
   
   const handle_login = async (event: React.FormEvent<HTMLFormElement>) => {
+    // const router = UseRouter();
     event.preventDefault();
     // TODO 
-    let sb = supa_connection();
-    const { data, error } = await sb.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email: loginData.email,
       password: loginData.password,
     })
-    console.log(error);
 
+    if (error == null) {
+      
+      console.log(data);
+      // router.refresh();
+    } else {
+      console.log("LOGIN ERROR");
+    }
 
-    console.log(loginData);
   }
   const navigate = useNavigate();
   const navigateToRegister = () => {
@@ -111,3 +116,4 @@ export default function LoginPage() {
     </div>
   );
 }
+
