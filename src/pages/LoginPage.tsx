@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../assets/LoginPage.css";
+import { supa_connection } from "../functions/supabase";
+
+ 
 
 interface LoginState {
   email: string;
@@ -24,6 +27,8 @@ export default function LoginPage() {
   
   const handle_login = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    // TODO 
+    let sb = supa_connection();
     console.log(loginData);
   }
   const navigate = useNavigate();
