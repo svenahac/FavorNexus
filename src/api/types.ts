@@ -23,4 +23,12 @@ export interface Achivement {
   name: string;
   description: string;
   gain: number;
+  img: string;
+}
+
+export interface Leader {
+  username: string;
+  level: number;
+  avatar: string;
+  trophy?: string;
 }

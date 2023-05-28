@@ -11,7 +11,7 @@ const Menu = () => {
         Home
       </a>
       <a
-        href="#"
+        href="/leaderboard"
         className="block md:inline-block px-3 py-2 rounded-md hover:text-primaryGreen focus:outline-none focus:text-primaryGreen"
       >
         Leaderboard

@@ -9,6 +9,8 @@ import {
   ProfilePage,
   LoadingPage,
   RequestPage,
+  CustomizePage,
+  LeaderboardPage,
 } from "./pages";
 import { supabase } from "./functions/supabase";
 
@@ -26,6 +28,8 @@ root.render(
         <Route path="/home" element={<HomePage />}></Route>
         <Route path="/profile" element={<ProfilePage />}></Route>
         <Route path="/request" element={<RequestPage />}></Route>
+        <Route path="/customize" element={<CustomizePage />}></Route>
+        <Route path="/leaderboard" element={<LeaderboardPage />}></Route>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
