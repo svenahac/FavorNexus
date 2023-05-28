@@ -40,7 +40,7 @@ export default function HomePage(currentsession: CurrentSession) {
     ];
 
     const loadFavors = async () => {
-        favors = await getFavors();
+        const favors = await getFavors(currentsession);
     };
 
     useEffect(() => {

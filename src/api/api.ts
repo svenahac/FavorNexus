@@ -1,7 +1,12 @@
-async function getFavors() {
-  const response = await fetch("/api/favors");
-  const favors = await response.json();
-  return favors;
+import { CurrentSession, supabase } from "../functions/supabase";
+
+async function getFavors(currentsession: CurrentSession) {
+
+  const {data, error} = await supabase.from("favor").select("*");
+  if (error == null) {
+    console.log(data);
+    return data;
+  }
 }
 
 export { getFavors };
