@@ -97,6 +97,7 @@ export default function LoginPage() {
               Login
             </button>
           </div>
+          {loginData.wrong_info ? <div>Error, wrong information</div>:<div></div>}
           <div className="flex flex-col items-center ">
             <p className="text-primary text-sm">
               Haven't created an account yet?
