@@ -3,7 +3,6 @@ import "../assets/HomePage.css";
 import Navbar from "../components/Navbar";
 import FavorCard from "../components/FavorCard";
 import { Favor } from "../api/types";
-import { get } from "http";
 import { useEffect, useState } from "react";
 import { getFavors } from "../api/api";
 import Footer from "../components/Footer";
