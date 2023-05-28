@@ -4,7 +4,7 @@ import Menu from "./Menu";
 function Navbar() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   return (
-    <nav className="bg-primary">
+    <nav className="bg-gradient-to-r from-cyan-500 to-blue-500 font-normal">
       <div className="max-w-7xl mx-auto flex items-center justify-between h-16 px-4">
         <div className="flex-shrink-0 font-bold tracking-wider">
           <img className="h-10 w-14" src={require("../images/Favo.png")}></img>
