@@ -48,21 +48,19 @@ export default function HomePage() {
 
     console.log(data_in);
 
-    const { data, error } = await supabase
-      .from("favor")
-      .insert(
-        [
-          { title: favor_form.title },
-          { by_user: user },
-          { description: favor_form.by_user },
-          { favos_price: favor_form.favos_price },
-          { location: favor_form.location },
-          { datetime: favor_form.datetime },
-          { open_slots: favor_form.open_slots },
-        ],
-        { defaultToNull: true }
-      );
+    const { data, error } = await supabase.from("favor").insert([
+      {
+        title: favor_form.title,
+        by_user: user,
+        description: favor_form.description,
+        favos_price: favor_form.favos_price,
+        location: favor_form.location,
+        datetime: favor_form.datetime,
+        open_slots: favor_form.open_slots,
+      },
+    ]);
     console.log(data, error);
+    window.location.reload();
   };
   const handle_input_change = (event: any) => {
     const { name, value } = event.target;
@@ -165,6 +163,8 @@ export default function HomePage() {
                       {/*body*/}
                       <div className="relative p-6 flex-auto">
                         <form
+                          id="form1"
+                          name="form1"
                           className="flex flex-col"
                           onSubmit={() => {
                             setShowModal(false);
@@ -244,6 +244,7 @@ export default function HomePage() {
                         <button
                           className="bg-gradient-to-r from-green-500 to-green-600 text-white active:bg-primary font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
                           type="submit"
+                          form="form1"
                           style={{ transition: "all .15s ease" }}
                         >
                           Request
