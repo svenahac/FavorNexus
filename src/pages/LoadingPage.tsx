@@ -1,8 +1,8 @@
 import { Session } from "@supabase/supabase-js"
 import { useEffect, useState } from "react"
-import Dashboard from "./dashboard"
-import { supabase } from "./functions/supabase"
-import LoginPage from "./pages/LoginPage"
+import { CurrentSession, supabase } from "../functions/supabase"
+import HomePage from "./HomePage"
+import LoginPage from "./LoginPage"
 
 export default function Home() {
   const [session, setSession] = useState<Session | null>(null)
@@ -19,7 +19,7 @@ export default function Home() {
 
   return (
     <div className="container" style={{ padding: '50px 0 100px 0' }}>
-      {!session ? <LoginPage/> : <Dashboard session={session} key={session.user.id}  />}
+      {!session ? <LoginPage/> : <HomePage session={session} key={session.user.id}  />}
     </div>
   )
 }
