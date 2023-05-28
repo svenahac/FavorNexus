@@ -7,62 +7,60 @@ import { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import { getFavors } from "../api/api";
 import React from "react";
-import { CurrentSession } from "../functions/supabase";
+import { CurrentSession, supabase } from "../functions/supabase";
 
-export default function HomePage(currentsession: CurrentSession) {
-
-
+export default function HomePage() {
   const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
+  const navigateToRegister = () => {
+    navigate("/register");
+  };
+  let favors: Favor[] = [
+    {
+      id: 1,
+      title: "Favor 1",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur nostrum, voluptatum, quibusdam, quia voluptates voluptate quos quas fkgdmdfkgmfgk kgmsd kgmdsk gmsdkg d dkgmsdmk gmdskgsdm kgmd",
+      price: 2400,
+      slots: 4,
+      datetime: "25.7.2023",
+      created_at: "2h ago",
+      location: "Koper",
+      byUser: "4",
+    },
+    {
+      id: 2,
+      title: "Obisk Vilijeve mame",
+      description:
+        "Obisk starejše osebe, ki živi sama in ji je dolgčas. Obisk bi trajal 2 uri. Oseba živi v centru Ljubljane. Oseba je stara 80 let in je zelo prijazna.",
+      price: 400,
+      slots: 1,
+      datetime: "5.8.2023",
+      created_at: "5h ago",
+      location: "Ljubljana",
+      byUser: "1",
+    },
+  ];
 
-    const navigate = useNavigate();
-    const navigateToRegister = () => {
-        navigate("/register");
-    };
-    let favors: Favor[] = [
-        {
-            id: 1,
-            title: "Favor 1",
-            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur nostrum, voluptatum, quibusdam, quia voluptates voluptate quos quas fkgdmdfkgmfgk kgmsd kgmdsk gmsdkg d dkgmsdmk gmdskgsdm kgmd",
-            price: 2400,
-            slots: 4,
-            datetime: "25.7.2023",
-            created_at: "2h ago",
-            location: "Koper",
-            byUser: "4",
-        },
-        {
-            id: 2,
-            title: "Obisk Vilijeve mame",
-            description: "Obisk starejše osebe, ki živi sama in ji je dolgčas. Obisk bi trajal 2 uri. Oseba živi v centru Ljubljane. Oseba je stara 80 let in je zelo prijazna.",
-            price: 400,
-            slots: 1,
-            datetime: "5.8.2023",
-            created_at: "5h ago",
-            location: "Ljubljana",
-            byUser: "1",
-        },
-    ];
+  // const loadFavors = async () => {
+  //   const favors = await getFavors(data.session);
+  // };
 
+  // useEffect(() => {
+  //   loadFavors();
+  // }, []);
 
-    const loadFavors = async () => {
-        const favors = await getFavors(currentsession);
-    };
-
-    useEffect(() => {
-        loadFavors();
-    }, []);
-  
   function renderFavors() {
-        return favors.map((favor: Favor) => {
-            return (
-                <FavorCard
-                    favor={favor}
-                    key={`${favor.location}-${favor.price}-${favor.created_at}`} />
-            );
-        });
-    }
+    return favors.map((favor: Favor) => {
+      return (
+        <FavorCard
+          favor={favor}
+          key={`${favor.location}-${favor.price}-${favor.created_at}`}
+        />
+      );
+    });
+  }
 
-<
   return (
     <div>
       <Navbar />
@@ -189,7 +187,4 @@ export default function HomePage(currentsession: CurrentSession) {
       <Footer />
     </div>
   );
-
-
 }
-

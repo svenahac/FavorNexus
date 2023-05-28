@@ -10,6 +10,7 @@ interface LoginState {
 }
 
 export default function LoginPage() {
+  const [loading, setLoading] = useState<boolean>(false);
   const [loginData, setLoginData] = useState<LoginState>({
     email: "",
     password: "",
@@ -26,6 +27,7 @@ export default function LoginPage() {
 
   const handle_login = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setLoading(true);
     // TODO
     const { data, error } = await supabase.auth.signInWithPassword({
       email: loginData.email,
@@ -38,6 +40,8 @@ export default function LoginPage() {
       console.log("LOGIN ERROR"); // TODO
       loginData.wrong_info = true;
     }
+    navigate("/home");
+    setLoading(false);
   };
   const navigate = useNavigate();
   const navigateToRegister = () => {
@@ -97,7 +101,11 @@ export default function LoginPage() {
               Login
             </button>
           </div>
-          {loginData.wrong_info ? <div>Error, wrong information</div>:<div></div>}
+          {loginData.wrong_info ? (
+            <div>Error, wrong information</div>
+          ) : (
+            <div></div>
+          )}
           <div className="flex flex-col items-center ">
             <p className="text-primary text-sm">
               Haven't created an account yet?
