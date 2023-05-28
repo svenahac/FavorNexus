@@ -17,3 +17,10 @@ export interface User {
   avatar: string;
   xp: number;
 }
+
+export interface Achivement {
+  readonly id?: number;
+  name: string;
+  description: string;
+  gain: number;
+}

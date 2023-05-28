@@ -6,7 +6,9 @@ function Navbar() {
   return (
     <nav className="bg-primary">
       <div className="max-w-7xl mx-auto flex items-center justify-between h-16 px-4">
-        <div className="flex-shrink-0 font-bold tracking-wider">LOGO</div>
+        <div className="flex-shrink-0 font-bold tracking-wider">
+          <img className="h-10 w-14" src={require("../images/Favo.png")}></img>
+        </div>
         <div className="hidden md:block">
           <Menu />
         </div>
