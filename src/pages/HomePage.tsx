@@ -8,54 +8,62 @@ import Footer from "../components/Footer";
 import { getFavors } from "../api/api";
 import React from "react";
 import { CurrentSession, supabase } from "../functions/supabase";
+import LoadingPage from "./LoadingPage";
 
+const supa = await supabase.auth.getSession();
 export default function HomePage() {
   const [showModal, setShowModal] = useState(false);
+  const [favors, setfavors] = useState<Array<any>>([]);
   const navigate = useNavigate();
   const navigateToRegister = () => {
     navigate("/register");
   };
-  let favors: Favor[] = [
-    {
-      id: 1,
-      title: "Favor 1",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur nostrum, voluptatum, quibusdam, quia voluptates voluptate quos quas fkgdmdfkgmfgk kgmsd kgmdsk gmsdkg d dkgmsdmk gmdskgsdm kgmd",
-      price: 2400,
-      slots: 4,
-      datetime: "25.7.2023",
-      created_at: "2h ago",
-      location: "Koper",
-      byUser: "4",
-    },
-    {
-      id: 2,
-      title: "Obisk Vilijeve mame",
-      description:
-        "Obisk starejše osebe, ki živi sama in ji je dolgčas. Obisk bi trajal 2 uri. Oseba živi v centru Ljubljane. Oseba je stara 80 let in je zelo prijazna.",
-      price: 400,
-      slots: 1,
-      datetime: "5.8.2023",
-      created_at: "5h ago",
-      location: "Ljubljana",
-      byUser: "1",
-    },
-  ];
+  if (supa == null) {
+    navigate("/login");
+  }
+  const loadFavors = async () => {
 
-  // const loadFavors = async () => {
-  //   const favors = await getFavors(data.session);
-  // };
 
-  // useEffect(() => {
-  //   loadFavors();
-  // }, []);
+  let {data, error} = await supabase.from("favor").select("*")
+  if (data != null) {
+      let out = data;
+
+      setfavors(out); 
+    return out.at;
+   }
+      
+     
+    // const {data, error} = await supabase.auth.getSession();
+    // if (error) {
+    //   console.log("ERROR LOAD FAVORS");
+    // } else {  
+    //   if (data.session != null) {
+    //     return await getFavors(data.session);
+    //   }
+    // }
+  };
+
+  let favorsPromise = async () => {
+    let a = await loadFavors();
+    // setfavors(a);
+  } 
+  useEffect(() => {
+    favorsPromise();
+  }, []);
+  useEffect(() => {
+    loadFavors();
+  }, []);
 
   function renderFavors() {
-    return favors.map((favor: Favor) => {
+    if (favors.length == 0 ) {
+      return <div>No new Favors</div>
+    }
+    console.log(favors);
+    return  favors?.map((favor) => {
       return (
         <FavorCard
           favor={favor}
-          key={`${favor.location}-${favor.price}-${favor.created_at}`}
+          key={`${favor.location}-${favor.favos_price}-${favor.created_at}`}
         />
       );
     });
