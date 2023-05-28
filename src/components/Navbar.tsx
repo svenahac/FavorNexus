@@ -6,8 +6,9 @@ function Navbar() {
   return (
     <nav className="bg-gradient-to-r from-cyan-500 to-blue-500 font-normal">
       <div className="max-w-7xl mx-auto flex items-center justify-between h-16 px-4">
-        <div className="flex-shrink-0 font-bold tracking-wider">
+        <div className="flex-shrink-0 font-bold flex flex-row items-center tracking-wider">
           <img className="h-10 w-14" src={require("../images/Favo.png")}></img>
+          <div>FavorNexus</div>
         </div>
         <div className="hidden md:block">
           <Menu />

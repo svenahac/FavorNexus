@@ -5,12 +5,10 @@ function AppCard(props: any) {
   let [confirmed, setConfirmed] = useState(false);
   return (
     <div className="no-scrollbar overflow-y-scroll bg-gradient-to-r from-cyan-500 to-blue-500 font-normal border-2 w-full h-52 rounded-md mb-2 flex flex-col ">
-      <div className="font-bold">@username</div>
+      <div className="font-bold">@tewok</div>
       <div className="w-full">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita soluta
-        reprehenderit placeat sapiente quibusdam earum quia, dignissimos,
-        reiciendis tempore debitis consequatur voluptatem eaque possimus quae
-        autem nihil, quo repudiandae totam.
+        Hi i saw your post and i want to come help you with your garden i have a
+        lot of experience with gardening and i would love to help you out.
       </div>
       <div className="mt-1">Phone: 123-456-789</div>
       {confirmed ? (

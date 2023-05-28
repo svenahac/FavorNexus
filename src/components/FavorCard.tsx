@@ -15,7 +15,7 @@ function FavorCard(props: any) {
             ></img>
           </div>
           <div className="text-l">
-            @username needs {favor.open_slots} helpers
+            @{props.username} needs {favor.open_slots} helper/s
           </div>
         </div>
 

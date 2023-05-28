@@ -14,6 +14,7 @@ export default function HomePage() {
   const [showModal, setShowModal] = useState(false);
   const [favors, setfavors] = useState<Array<any>>([]);
   const [user, setuser] = useState<string>("");
+  const usernames = ["Đorđe", "Gio Gio", "Te Wok", "John Doe", "The Whistler"];
   let getuser = async () => {
     let promis = await supabase.auth.getUser();
     let data = promis.data.user?.id;
@@ -118,6 +119,7 @@ export default function HomePage() {
       return (
         <FavorCard
           favor={favor}
+          username={usernames[Math.floor(Math.random() * 5)]}
           key={`${favor.location}-${favor.favos_price}-${favor.created_at}`}
         />
       );
