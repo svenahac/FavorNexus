@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { supabase } from "../functions/supabase";
@@ -18,23 +18,45 @@ export default function RequestPage() {
     open_slots: 0,
     created_at: "string",
   };
-  /*
-  let applications: any = {
-    description: "string",
-    contact: "string",
-  };
+  const  [user, setUser] = useState<string>("");
+  const [data, set_data] = useState<any>(null);
 
-  function renderApplications() {
-    return applications.map((application: any) => {
-      return (
-        <AppCard
-          achiv={applications}
-          key={`${applications.description}-${applications.contact}`}
-        />
-      );
-    });
+  
+  let get_user = async () => {
+    let user_promise = await supabase.auth.getUser();
+    let data = user_promise.data.user?.id;
+    if (data != undefined) {
+      await setUser(data);
+    }  
+  };
+  get_user();
+
+  useEffect(() => {
+    get_user();
+  }, []);
+
+  useEffect(() => {
+    supa();
+  }, []);
+  
+     
+  let supa = async () => {if (user != "") {set_data (await supabase
+                            .from("favor")
+                            .select("*")
+                            .eq("by_user", user))
+  
   }
-  */
+
+}
+  supa();
+    console.log(data);
+
+if (data != null && favor != undefined) {
+    favor = data.data[0];
+  }
+
+
+ 
   return (
     <div>
       <Navbar />
