@@ -27,12 +27,6 @@ const Menu = () => {
       >
         Profile
       </a>
-      <a
-        href="#"
-        className="block md:inline-block px-3 py-2 rounded-md hover:text-white focus:outline-none focus:text-white "
-      >
-        Options
-      </a>
     </div>
   );
 };
