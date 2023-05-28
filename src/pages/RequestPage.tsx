@@ -5,6 +5,7 @@ import { supabase } from "../functions/supabase";
 import { Favor } from "../api/types";
 import MyRequestCard from "../components/MyRequestCard";
 import AppCard from "../components/AppCard";
+import AppCardConfirmed from "../components/AppCardConfirmed";
 
 export default function RequestPage() {
   let favor: Favor = {
@@ -18,16 +19,15 @@ export default function RequestPage() {
     open_slots: 0,
     created_at: "string",
   };
-  const  [user, setUser] = useState<string>("");
+  const [user, setUser] = useState<string>("");
   const [data, set_data] = useState<any>(null);
 
-  
   let get_user = async () => {
     let user_promise = await supabase.auth.getUser();
     let data = user_promise.data.user?.id;
     if (data != undefined) {
       await setUser(data);
-    }  
+    }
   };
   get_user();
 
@@ -38,25 +38,19 @@ export default function RequestPage() {
   useEffect(() => {
     supa();
   }, []);
-  
-     
-  let supa = async () => {if (user != "") {set_data (await supabase
-                            .from("favor")
-                            .select("*")
-                            .eq("by_user", user))
-  
-  }
 
-}
+  let supa = async () => {
+    if (user != "") {
+      set_data(await supabase.from("favor").select("*").eq("by_user", user));
+    }
+  };
   supa();
-    console.log(data);
+  console.log(data);
 
-if (data != null && favor != undefined) {
+  if (data != null && favor != undefined) {
     favor = data.data[0];
   }
 
-
- 
   return (
     <div>
       <Navbar />
@@ -72,6 +66,7 @@ if (data != null && favor != undefined) {
       </h1>
       <div className="no-scrollbar overflow-y-scroll rounded-md w-full min-h-screen flex flex-col items-center mt-2 p-2">
         <AppCard />
+        <AppCardConfirmed />
       </div>
       <Footer />
     </div>
