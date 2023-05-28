@@ -1,12 +1,12 @@
 export interface Favor {
   readonly id?: number;
   title: string;
-  byUser: string;
+  by_user: string;
   description: string;
-  price: number;
+  favos_price: number;
   location: string;
   datetime: string;
-  slots: number;
+  open_slots: number;
   created_at: string;
 }
 

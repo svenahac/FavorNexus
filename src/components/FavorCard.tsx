@@ -23,7 +23,7 @@ function FavorCard(props: any) {
         </div>
         <div className="m-1 ">{favor.description}</div>
         <div className="flex flex-row justify-between">
-          <div className="ml-1">Slots: {favor.slots}</div>
+          <div className="ml-1">Slots: {favor.open_slots}</div>
           <button onClick={() => setShowModal(true)}>Apply</button>
           {showModal ? (
             <>
@@ -91,7 +91,7 @@ function FavorCard(props: any) {
             </>
           ) : null}
           <div className="flex flex-row">
-            <div>{favor.price}</div>
+            <div>{favor.favos_price}</div>
             <div className="ml-1 mr-1">img</div>
           </div>
         </div>
