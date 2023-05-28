@@ -36,7 +36,7 @@ html {
 }
 body {
   color: white;
-  background: black;
+  background-image: url("../images/background.jpg");
 }
 
 #Home {

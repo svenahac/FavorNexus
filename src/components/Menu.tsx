@@ -17,10 +17,10 @@ const Menu = () => {
         Leaderboard
       </a>
       <a
-        href="#"
+        href="/request"
         className="block md:inline-block px-3 py-2 rounded-md hover:text-primaryGreen  focus:outline-none focus:text-primaryGreen "
       >
-        My Favors
+        My Request
       </a>
       <a
         href="/profile"
