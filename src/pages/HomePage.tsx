@@ -14,6 +14,67 @@ const supa = await supabase.auth.getSession();
 export default function HomePage() {
   const [showModal, setShowModal] = useState(false);
   const [favors, setfavors] = useState<Array<any>>([]);
+  const [user, setuser] = useState<string>("");
+  let getuser = async () => {
+    let promis = await supabase.auth.getUser();
+    let data = promis.data.user?.id;
+
+    if (data != undefined) {
+      await setuser(data);
+    }
+    }
+  getuser();
+  const [favor_form, setFavor_form] = useState<Favor>({
+  title: "",
+  by_user: user,
+  description: "",
+  favos_price: 0,
+  location: "",
+  datetime: "YYYY-MM-DD",
+  open_slots: 0,
+  created_at: "",
+  });
+
+  
+
+  
+  const send_form = async () => {
+
+    let data_in = {
+  title: favor_form.title,
+  by_user: user,
+  description: favor_form.by_user,
+  favos_price: favor_form.favos_price,
+  datetime: favor_form.datetime,
+  location: favor_form.favos_price,
+  open_slots: favor_form.open_slots,
+  created_at: favor_form.created_at,
+    };
+    
+    console.log(data_in);
+  
+    const { data, error } = await supabase
+      .from('favor')
+      .insert([
+  {title: favor_form.title},
+  {by_user: user},
+  {description: favor_form.by_user},
+  {favos_price: favor_form.favos_price},
+  {location: favor_form.location},
+  {datetime: favor_form.datetime},
+  {open_slots: favor_form.open_slots},
+    ],{defaultToNull: true} )    
+    console.log(data,error);
+  }
+  const handle_input_change = (event: any ) => {
+    const { name, value } = event.target;
+    setFavor_form((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  
   const navigate = useNavigate();
   const navigateToRegister = () => {
     navigate("/register");
@@ -45,8 +106,11 @@ export default function HomePage() {
 
   let favorsPromise = async () => {
     let a = await loadFavors();
-    // setfavors(a);
   } 
+  
+  useEffect(() => {
+    getuser();
+  }, []);
   useEffect(() => {
     favorsPromise();
   }, []);
@@ -58,7 +122,6 @@ export default function HomePage() {
     if (favors.length == 0 ) {
       return <div>No new Favors</div>
     }
-    console.log(favors);
     return  favors?.map((favor) => {
       return (
         <FavorCard
@@ -68,6 +131,10 @@ export default function HomePage() {
       );
     });
   }
+
+    function moment(datetime: string) {
+        throw new Error("Function not implemented.");
+    }
 
   return (
     <div>
@@ -103,11 +170,14 @@ export default function HomePage() {
                       </div>
                       {/*body*/}
                       <div className="relative p-6 flex-auto">
-                        <form className="flex flex-col">
+                        <form className="flex flex-col" onSubmit={()=>{setShowModal(false); send_form }}  >
                           <label className="text-lg font-semibold">Title</label>
                           <input
                             className="border-2 border-primary rounded-md p-2 mb-2"
                             type="text"
+                            name="title"
+                            value={favor_form.title}
+                            onChange={handle_input_change}
                             placeholder="Title"
                           />
                           <label className="text-lg font-semibold">
@@ -116,24 +186,37 @@ export default function HomePage() {
                           <textarea
                             className="border-2 border-primary rounded-md p-2 mb-2"
                             placeholder="Description"
+                            name="description"
+                            id="description"
+                            value={favor_form.description}
+                            onChange={handle_input_change}
                           />
                           <label className="text-lg font-semibold">Price</label>
                           <input
                             className="border-2 border-primary rounded-md p-2 mb-2"
                             type="number"
                             placeholder="Price"
+                            name="favos_price"
+                            value={favor_form.favos_price}
+                            onChange={handle_input_change}
                           />
                           <label className="text-lg font-semibold">Slots</label>
                           <input
                             className="border-2 border-primary rounded-md p-2 mb-2"
                             type="number"
                             placeholder="Slots"
+                            name="open_slots"
+                            value={favor_form.open_slots}
+                            onChange={handle_input_change}
                           />
                           <label className="text-lg font-semibold">Date</label>
                           <input
                             className="border-2 border-primary rounded-md p-2 mb-2"
                             type="date"
                             placeholder="Date"
+                            name="datetime"
+                            value={favor_form.datetime}
+                            onChange={handle_input_change}
                           />
                           <label className="text-lg font-semibold">
                             Location
@@ -142,6 +225,9 @@ export default function HomePage() {
                             className="border-2 border-primary rounded-md p-2 mb-2"
                             type="text"
                             placeholder="Location"
+                            name="location"
+                            value={favor_form.location}
+                            onChange={handle_input_change}
                           />
                         </form>
                       </div>
@@ -157,9 +243,9 @@ export default function HomePage() {
                         </button>
                         <button
                           className="bg-primary text-white active:bg-primary font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
-                          type="button"
+                          type="submit"
                           style={{ transition: "all .15s ease" }}
-                          onClick={() => setShowModal(false)}
+                          
                         >
                           Request
                         </button>
